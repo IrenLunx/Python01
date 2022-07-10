@@ -6,6 +6,7 @@ result = True
 for i in range(a):
     if i > 1 and a % i == 0:
         result = False
+        break
 if a < 1:
     print('Число не является натуральным!')
 elif result == True:

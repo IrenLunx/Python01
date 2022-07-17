@@ -8,15 +8,17 @@ def fibonacci(n):
         return fibonacci(n - 1) + fibonacci(n - 2)
 
 def fibonacciNeg(n):
-    if n == 1 or n == 0:
+    if n == 1:
         return 1
+    elif n == 0:
+        return 0
     else:
         return fibonacciNeg(n + 2) - fibonacciNeg(n + 1)
 
 n = int(input('Введите положительное число: '))
 newList = []
-for i in range(-n - 1, n + 1):
-    if i < 0:
+for i in range(-n, n + 1):
+    if i <= 0:
         newList += [fibonacciNeg(i)]
     elif i > 0:
         newList += [fibonacci(i)]

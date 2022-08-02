@@ -1,3 +1,3 @@
-from HomeWork7.data_users import chooseUsers
+from data_users import chooseUsers
 
 chooseUsers()

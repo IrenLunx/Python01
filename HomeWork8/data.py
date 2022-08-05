@@ -1,21 +1,35 @@
 import pandas as pd
+from datetime import date, time, datetime
 
-# table = pd.read_csv('HomeWork8/classAud.csv')
-# table2 = pd.read_csv('HomeWork8/class.csv')
-# print()
-df = pd.concat(
-    map(pd.read_csv, ['HomeWork8/people.csv', 'HomeWork8/students.csv']), ignore_index=True)
-print(df)
+def graph():
+    ID_stu = input('ID студента: ')
+    ID_class = input('ID места в классе: ')
+    dateNow = date.today()
+    timeNow = datetime.now().time()
+    newStr = f'{ID_stu},{ID_class},{str(dateNow)},{str(timeNow)}'
 
-# def classSt():
-#     сlassAud = {}
-#     path = 'HomeWork8/class.csv'
-#     path2 = 'HomeWork8/classAud.csv'
-#     with open(path, 'r', encoding = 'utf-8') as cl:
-#         data = cl.readlines()
-#     with open(path2, 'r', encoding = 'utf-8') as cl2:
-#         data2 = cl2.readlines()
-#         for i in data2:
-#             сlassAud[i] = data
-#     print(сlassAud)
-# classSt()
+    path = 'graph.csv'
+    with open(path, 'a', encoding = 'utf-8') as cl: 
+        cl.write(newStr)
+        cl.write('\n')
+    
+    graph = pd.read_csv('graph.csv')
+    print(graph)
+
+   
+
+def graph2():
+    table = pd.read_csv('students.csv')
+    table2 = pd.read_csv('graph.csv')
+    table3 = pd.read_csv('class.csv')
+
+    result = table3.merge(table2).merge(table)
+    print(result)
+
+def people():
+    table = pd.read_csv('people.csv')
+    table2 = pd.read_csv('adress.csv')
+    table3 = pd.read_csv('phone_numbers.csv')
+
+    result = table3.merge(table).merge(table2)
+    print(result)

@@ -34,27 +34,20 @@ async def dell_contact_text(message: types.Message):
 
 @dp.message_handler(state=ByerState.wait_item_name_dell)
 async def dell_contact_text(message: types.Message, state: FSMContext):
-    data_menger.dellContact(message.text)
-    await message.answer(text=f'Контакт {message.text} удалён!')
+    trueFalse = data_menger.dellContact(message.text)
+    if trueFalse:
+        await message.answer(text=f'Контакт {message.text} удалён!')
+    else: 
+        await message.answer(text=f'Контакта {message.text} не существует!')
     await state.reset_state()
 
 @dp.message_handler(text='Добавление контакта')
-async def answer_start_text(message: types.Message):
-    await message.answer(text='Введите фамилию и имя:')
+async def add_contact_text(message: types.Message):
+    await message.answer(text='Введите фамилию, имя, номер и комментарий к нему:')
     await ByerState.wait_item_name_add.set()
 
 @dp.message_handler(state=ByerState.wait_item_name_add)
-async def dell_contact_text(message: types.Message, state: FSMContext):
-    await message.answer(text='Введите номер:')
-    await ByerState.wait_item_number.set()
-
-@dp.message_handler(state=ByerState.wait_item_number)
-async def dell_contact_text(message: types.Message, state: FSMContext):
-    await message.answer(text='Введите комментарий:')
-    await ByerState.wait_item_comment.set()
-
-@dp.message_handler(state=ByerState.wait_item_comment)
-async def dell_contact_text(message: types.Message, state: FSMContext):
+async def add_contact_text(message: types.Message, state: FSMContext):
     data_menger.addContact(message.text)
     await message.answer(text=f'Контакт {message.text} добавлен!')
     await state.reset_state()

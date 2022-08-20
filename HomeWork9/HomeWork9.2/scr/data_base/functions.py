@@ -22,14 +22,18 @@ class DataBase:
     def dellContact(self, name: str):
         with open(self.path, 'r', encoding = 'utf-8') as file:
             data = file.readlines()
-        with open(self.path, 'w', encoding = 'utf-8') as file2:
+            count = False
             for i in data:
-                if name.lower() not in i.lower(): file2.write(i)
+                if name.lower() in i.lower(): 
+                    count = True
+                    break
+            if count:
+                with open(self.path, 'w', encoding = 'utf-8') as file2:
+                    for i in data:
+                        if name.lower() not in i.lower(): file2.write(i)
+                return True
+            else: return False
 
-    def addContact(self, name, number, commUs):
-        name = input('Введите имя: ')
-        number = input('Введите номер: ')
-        commUs = input('Введите комментарий: ')
-        newUs = f'{name} {number} {commUs}'
+    def addContact(self, newUs):
         with open(self.path, 'a', encoding = 'utf-8') as file:
             file.write(f'\n{newUs}')

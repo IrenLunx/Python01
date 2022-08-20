@@ -11,46 +11,42 @@ Eur_Rub = 'https://www.google.com/search?q=%D0%B5%D0%B2%D1%80%D0%BE+%D0%BA+%D1%8
 
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'}
 
-def dollar_rub(Dollar_Rub, headers):
+def dollar_rub():
     full_pars = requests.get(Dollar_Rub, headers=headers)
     soup_pars = BeautifulSoup(full_pars.content, 'html.parser')
     convert_D_R = soup_pars.findAll('span', {'class': 'DFlfde SwHCTb', 'data-precision': 2})
-
-    result = str(convert_D_R[0]).text
-    # result = result.replace(',', '.')
-        # return result
-    print(tuple(result))
-
-def eur_rub(Eur_Rub, headers):
-    convert_E_R = soup_pars.findAll('span', {'class': 'DFlfde SwHCTb', 'data-precision': 2})
-    full_pars = requests.get(Eur_Rub, headers=headers)
-    soup_pars = BeautifulSoup(full_pars.content, 'html.parser')
-    result = str(convert_E_R[0].text)
+    result = str(convert_D_R[0].text)
     result = float(result.replace(',', '.'))
     return result
 
-Dollar_Rub()
+def eur_rub():
+    full_pars = requests.get(Eur_Rub, headers=headers)
+    soup_pars = BeautifulSoup(full_pars.content, 'html.parser')
+    convert_E_R = soup_pars.findAll('span', {'class': 'DFlfde SwHCTb', 'data-precision': 2})
+    result = str(convert_E_R[0].text)
+    result = float(result.replace(',', '.'))
+    return result
 
 # print('Перевод из доллара в рубль - 1')
 # print('Перевод из рубля в доллар - 2')
 # print('Перевод из евро в рубль - 3')
 # print('Перевод из рубля в евро - 4')
-# countVal = float(input('Введите число: '))
-# val = float(input('Введите число для перевода: '))
+# val = float(input('Введите число: '))
+# countVal = float(input('Введите число для перевода: '))
 # match val:
 #     case 1: 
-#         result = ConvertVal.Dollar_Rub()
-#         result *= val
+#         result = dollar_rub()
+#         result *= countVal
 #         print(result)
 #     case 2:
-#         result = ConvertVal.Dollar_Rub()
-#         result = val / result
+#         result = dollar_rub()
+#         result = countVal / result
 #         print(result)
 #     case 3:
-#         result = ConvertVal.Eur_Rub()
-#         result *= val
+#         result = eur_rub()
+#         result *= countVal
 #         print(result)
 #     case 4:
-#         result = ConvertVal.Eur_Rub()
-#         result = val / result
+#         result = eur_rub()
+#         result = countVal / result
 #         print(result)

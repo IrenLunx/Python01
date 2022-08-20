@@ -26,27 +26,3 @@ def eur_rub():
     result = str(convert_E_R[0].text)
     result = float(result.replace(',', '.'))
     return result
-
-# print('Перевод из доллара в рубль - 1')
-# print('Перевод из рубля в доллар - 2')
-# print('Перевод из евро в рубль - 3')
-# print('Перевод из рубля в евро - 4')
-# val = float(input('Введите число: '))
-# countVal = float(input('Введите число для перевода: '))
-# match val:
-#     case 1: 
-#         result = dollar_rub()
-#         result *= countVal
-#         print(result)
-#     case 2:
-#         result = dollar_rub()
-#         result = countVal / result
-#         print(result)
-#     case 3:
-#         result = eur_rub()
-#         result *= countVal
-#         print(result)
-#     case 4:
-#         result = eur_rub()
-#         result = countVal / result
-#         print(result)

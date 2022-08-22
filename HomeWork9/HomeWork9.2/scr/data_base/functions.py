@@ -2,6 +2,18 @@ class DataBase:
     def __init__(self, path='data_base\data\phone_book.txt'):
         self.path = path
 
+    contact = ''
+
+    def addResult(self, mess: str):
+        self.contact += f'{mess} '
+
+    def addContact(self):
+        with open(self.path, 'a', encoding = 'utf-8') as file:
+            file.write(f'\n{self.contact}')
+
+    def clearContact(self):
+        self.contact = ''
+
     def lookContacts(self):
         with open(self.path, 'r', encoding = 'utf-8') as file: 
             data = file.readlines()
@@ -33,7 +45,3 @@ class DataBase:
                         if name.lower() not in i.lower(): file2.write(i)
                 return True
             else: return False
-
-    def addContact(self, newUs):
-        with open(self.path, 'a', encoding = 'utf-8') as file:
-            file.write(f'\n{newUs}')
